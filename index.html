@@ -95,25 +95,50 @@ footer{text-align:center;color:#72869d;font-size:12px;padding:20px}
 </div>
 
 <script>
-function checkUID(){
- const uid=document.getElementById("uid").value.trim();
- const msg=document.getElementById("message");
+fulnction checkUID(){
+ 
+async function checkUID() {
+  const uid = document.getElementById("uid").value.trim();
+  const region = document.getElementById("region").value;
+  const msg = document.getElementById("message");
 
- if(!uid){
-  msg.innerText="Please enter a UID first!";
-  return;
- }
+  if (!uid) {
+    msg.innerText = "Please enter a UID first!";
+    return;
+  }
 
- msg.innerText="UID: "+uid+" | Region: "+
- document.getElementById("region").value+
- " | API not connected yet.";
+  msg.innerText = "Connecting to GSP VORTEX Server...";
 
- document.getElementById("name").innerText="API Not Connected";
- document.getElementById("level").innerText="API Not Connected";
- document.getElementById("created").innerText="API Not Connected";
- document.getElementById("days").innerText="API Not Connected";
- document.getElementById("login").innerText="API Not Connected";
+  const fields = ["name", "level", "created", "days", "login"];
+
+  fields.forEach(id => {
+    document.getElementById(id).innerText = "Loading...";
+  });
+
+  try {
+    const response = await fetch(
+      "https://gsp-ff-uid-tracker.onrender.com/api/player?uid=" +
+      encodeURIComponent(uid) +
+      "&region=" + encodeURIComponent(region)
+    );
+
+    const data = await response.json();
+
+    msg.innerText = data.message || "Backend Connected";
+
+    fields.forEach(id => {
+      document.getElementById(id).innerText =
+        "Waiting for Free Fire API";
+    });
+
+  } catch (error) {
+    msg.innerText = "Server connection failed. Try again.";
+    fields.forEach(id => {
+      document.getElementById(id).innerText = "Unavailable";
+    });
+  }
 }
+ 
 </script>
 </body>
 </html>
