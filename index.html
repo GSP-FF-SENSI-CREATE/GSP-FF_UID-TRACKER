@@ -1,172 +1,119 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GSP UID TRACKER</title>
+<title>GSP VORTEX | UID TRACKER</title>
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+ background:#080d19;
+ color:white;
+ font-family:Arial,sans-serif;
+ min-height:100vh;
+ padding:20px;
 }
-
-body {
-  min-height: 100vh;
-  font-family: Arial, sans-serif;
-  background: radial-gradient(circle at top, #102d5c, #050914 55%, #000);
-  color: white;
-  padding: 20px;
+.container{max-width:500px;margin:auto}
+header{text-align:center;padding:25px 10px}
+.logo{font-size:30px;font-weight:900;color:#27d9ff}
+header p{color:#9baec5;margin-top:8px}
+.panel{
+ background:#111d30;
+ border:1px solid #24425c;
+ border-radius:16px;
+ padding:20px;
+ margin-bottom:20px;
 }
-
-header {
-  text-align: center;
-  padding: 35px 10px;
+label{display:block;margin:12px 0 8px;color:#c5d5e7}
+input,select{
+ width:100%;padding:14px;border-radius:9px;
+ border:1px solid #34516d;background:#091321;
+ color:white;font-size:16px;
 }
-
-.logo {
-  font-size: 36px;
-  font-weight: 900;
-  color: #28aaff;
-  text-shadow: 0 0 20px #008cff;
+button{
+ width:100%;padding:15px;margin-top:18px;
+ background:#16c9f5;color:#00121b;
+ border:0;border-radius:9px;font-size:17px;
+ font-weight:bold;cursor:pointer;
 }
-
-header p {
-  color: #a8c8e9;
-  margin-top: 10px;
-  letter-spacing: 2px;
+button:active{transform:scale(.98)}
+.result-title{color:#27d9ff;margin-bottom:15px}
+.detail{
+ background:#0a1525;border:1px solid #203b56;
+ padding:14px;border-radius:9px;margin-top:10px;
 }
-
-.container {
-  max-width: 450px;
-  margin: 20px auto;
-  background: rgba(12, 27, 50, 0.94);
-  border: 1px solid #168cff;
-  border-radius: 18px;
-  padding: 25px;
-  box-shadow: 0 0 25px #0066aa55;
-}
-
-h2 {
-  text-align: center;
-  margin-bottom: 25px;
-  color: #38b6ff;
-}
-
-label {
-  display: block;
-  margin: 15px 0 8px;
-  color: #c9e5ff;
-}
-
-input, select {
-  width: 100%;
-  padding: 15px;
-  background: #071426;
-  color: white;
-  border: 1px solid #237fc5;
-  border-radius: 9px;
-  font-size: 16px;
-  outline: none;
-}
-
-button {
-  width: 100%;
-  padding: 15px;
-  margin-top: 22px;
-  background: linear-gradient(90deg,#087bff,#00c8ff);
-  border: none;
-  border-radius: 9px;
-  color: white;
-  font-size: 17px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-#result {
-  margin-top: 20px;
-  padding: 15px;
-  border-radius: 10px;
-  background: #071426;
-  color: #bce5ff;
-  line-height: 1.7;
-  display: none;
-}
-
-footer {
-  text-align: center;
-  color: #7796b5;
-  margin-top: 35px;
-  font-size: 12px;
-}
+.detail span{display:block;color:#8fa9c4;font-size:12px}
+.detail strong{display:block;margin-top:6px;font-size:16px}
+.note{font-size:12px;color:#91a6bd;text-align:center;margin-top:15px}
+footer{text-align:center;color:#72869d;font-size:12px;padding:20px}
 </style>
 </head>
 
 <body>
+<div class="container">
 
 <header>
-  <div class="logo">GSP VORTEX</div>
-  <p>FREE FIRE UID TRACKER</p>
+ <div class="logo">GSP VORTEX</div>
+ <h2>FREE FIRE UID TRACKER</h2>
+ <p>Search Player Account Details</p>
 </header>
 
-<div class="container">
-  <h2>ACCOUNT CHECKER</h2>
+<div class="panel">
+ <label>Enter Free Fire UID</label>
+ <input type="number" id="uid" placeholder="Enter Player UID">
 
-  <label>Enter Free Fire UID</label>
-  <input
-    type="number"
-    id="uid"
-    placeholder="Enter Player UID"
-  >
+ <label>Select Region</label>
+ <select id="region">
+  <option value="IND">India</option>
+  <option value="BR">Brazil</option>
+  <option value="SG">Singapore</option>
+  <option value="US">United States</option>
+  <option value="ID">Indonesia</option>
+  <option value="TH">Thailand</option>
+  <option value="BD">Bangladesh</option>
+  <option value="PK">Pakistan</option>
+ </select>
 
-  <label>Select Region</label>
-  <select id="region">
-    <option value="IND">India</option>
-    <option value="BD">Bangladesh</option>
-    <option value="BR">Brazil</option>
-    <option value="US">United States</option>
-    <option value="ID">Indonesia</option>
-    <option value="PK">Pakistan</option>
-    <option value="SG">Singapore</option>
-  </select>
-
-  <button onclick="checkUID()">CHECK UID</button>
-
-  <div id="result"></div>
+ <button onclick="checkUID()">CHECK UID</button>
+ <p class="note" id="message">Enter UID to check player details.</p>
 </div>
 
-<footer>
-  GSP UID TRACKER © 2026
-  <br><br>
-  Powered by GSP VORTEX
-</footer>
+<div class="panel">
+ <h3 class="result-title">PLAYER INFORMATION</h3>
+
+ <div class="detail"><span>PLAYER NAME</span><strong id="name">Not Available</strong></div>
+ <div class="detail"><span>PLAYER LEVEL</span><strong id="level">Not Available</strong></div>
+ <div class="detail"><span>ACCOUNT CREATION DATE</span><strong id="created">Not Available</strong></div>
+ <div class="detail"><span>TOTAL ACCOUNT DAYS</span><strong id="days">Not Available</strong></div>
+ <div class="detail"><span>LAST LOGIN</span><strong id="login">Not Available</strong></div>
+
+ <p class="note">Real player details will appear after connecting a verified API.</p>
+</div>
+
+<footer>© 2026 GSP VORTEX | UID TRACKER</footer>
+</div>
 
 <script>
-function checkUID() {
-  const uid = document.getElementById("uid").value.trim();
-  const region = document.getElementById("region").value;
-  const result = document.getElementById("result");
+function checkUID(){
+ const uid=document.getElementById("uid").value.trim();
+ const msg=document.getElementById("message");
 
-  result.style.display = "block";
+ if(!uid){
+  msg.innerText="Please enter a UID first!";
+  return;
+ }
 
-  if (!/^\d{5,15}$/.test(uid)) {
-    result.innerHTML = "⚠️ Please enter a valid UID.";
-    return;
-  }
+ msg.innerText="UID: "+uid+" | Region: "+
+ document.getElementById("region").value+
+ " | API not connected yet.";
 
-  result.innerHTML = `
-    <b>UID:</b> ${uid}<br>
-    <b>Region:</b> ${region}<br><br>
-    <b>Account Creation Date:</b><br>
-    Data API not connected yet.<br><br>
-    <span style="color:#38b6ff">
-      UID accepted. Waiting for verified data source.
-    </span>
-  `;
+ document.getElementById("name").innerText="API Not Connected";
+ document.getElementById("level").innerText="API Not Connected";
+ document.getElementById("created").innerText="API Not Connected";
+ document.getElementById("days").innerText="API Not Connected";
+ document.getElementById("login").innerText="API Not Connected";
 }
 </script>
-
 </body>
 </html>
