@@ -1,1 +1,172 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GSP UID TRACKER</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  background: radial-gradient(circle at top, #102d5c, #050914 55%, #000);
+  color: white;
+  padding: 20px;
+}
+
+header {
+  text-align: center;
+  padding: 35px 10px;
+}
+
+.logo {
+  font-size: 36px;
+  font-weight: 900;
+  color: #28aaff;
+  text-shadow: 0 0 20px #008cff;
+}
+
+header p {
+  color: #a8c8e9;
+  margin-top: 10px;
+  letter-spacing: 2px;
+}
+
+.container {
+  max-width: 450px;
+  margin: 20px auto;
+  background: rgba(12, 27, 50, 0.94);
+  border: 1px solid #168cff;
+  border-radius: 18px;
+  padding: 25px;
+  box-shadow: 0 0 25px #0066aa55;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #38b6ff;
+}
+
+label {
+  display: block;
+  margin: 15px 0 8px;
+  color: #c9e5ff;
+}
+
+input, select {
+  width: 100%;
+  padding: 15px;
+  background: #071426;
+  color: white;
+  border: 1px solid #237fc5;
+  border-radius: 9px;
+  font-size: 16px;
+  outline: none;
+}
+
+button {
+  width: 100%;
+  padding: 15px;
+  margin-top: 22px;
+  background: linear-gradient(90deg,#087bff,#00c8ff);
+  border: none;
+  border-radius: 9px;
+  color: white;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#result {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 10px;
+  background: #071426;
+  color: #bce5ff;
+  line-height: 1.7;
+  display: none;
+}
+
+footer {
+  text-align: center;
+  color: #7796b5;
+  margin-top: 35px;
+  font-size: 12px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">GSP VORTEX</div>
+  <p>FREE FIRE UID TRACKER</p>
+</header>
+
+<div class="container">
+  <h2>ACCOUNT CHECKER</h2>
+
+  <label>Enter Free Fire UID</label>
+  <input
+    type="number"
+    id="uid"
+    placeholder="Enter Player UID"
+  >
+
+  <label>Select Region</label>
+  <select id="region">
+    <option value="IND">India</option>
+    <option value="BD">Bangladesh</option>
+    <option value="BR">Brazil</option>
+    <option value="US">United States</option>
+    <option value="ID">Indonesia</option>
+    <option value="PK">Pakistan</option>
+    <option value="SG">Singapore</option>
+  </select>
+
+  <button onclick="checkUID()">CHECK UID</button>
+
+  <div id="result"></div>
+</div>
+
+<footer>
+  GSP UID TRACKER © 2026
+  <br><br>
+  Powered by GSP VORTEX
+</footer>
+
+<script>
+function checkUID() {
+  const uid = document.getElementById("uid").value.trim();
+  const region = document.getElementById("region").value;
+  const result = document.getElementById("result");
+
+  result.style.display = "block";
+
+  if (!/^\d{5,15}$/.test(uid)) {
+    result.innerHTML = "⚠️ Please enter a valid UID.";
+    return;
+  }
+
+  result.innerHTML = `
+    <b>UID:</b> ${uid}<br>
+    <b>Region:</b> ${region}<br><br>
+    <b>Account Creation Date:</b><br>
+    Data API not connected yet.<br><br>
+    <span style="color:#38b6ff">
+      UID accepted. Waiting for verified data source.
+    </span>
+  `;
+}
+</script>
+
+</body>
+</html>
